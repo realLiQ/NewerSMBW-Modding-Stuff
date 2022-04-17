@@ -425,6 +425,20 @@ int dScKoopatlas_c::onCreate() {
 
 	somethingAboutSound(_8042A788);
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// Set borders
 	// W1
 	WMBorder.xLeft[0] = 1344.0f;
@@ -566,7 +580,8 @@ void dScKoopatlas_c::executeState_Normal() {
 	// 			save->SetLevelCondition(w, l, COND_COIN_ALL);
 #endif
 	} else if (nowPressed & WPAD_A) {
-		OSReport("Starting ViewMap Feature by LiQ");
+		sfxShouldPlay = false;
+		sfxIsPlaying = false;
 		WMViewerVisible = true;
 		hud->hideAll();
 		MapSoundPlayer(SoundRelatedClass, SE_SYS_MAP_VIEW_MODE, 1);
@@ -805,15 +820,36 @@ void dScKoopatlas_c::executeState_CoinsWait() {
 
 
 void dScKoopatlas_c::executeState_WMViewerWait() {
+
 	int nowPressed = Remocon_GetPressed(GetActiveRemocon());
 
 	if (nowPressed & WPAD_A) {
-
+		if (sfxIsPlaying) {
+			scrollHandle.Stop(0);
+			sfxIsPlaying = false;
+		}
 		WMViewerVisible = false;
 		dWorldCamera_c::instance->zoomLevel = 2.8f;
 		MapSoundPlayer(SoundRelatedClass, SE_SYS_MAP_VIEW_QUIT, 1);
 		state.setState(&StateID_Normal);
 		hud->unhideAll();
+	}
+
+	if (sfxShouldPlay)
+	{
+		if (!sfxIsPlaying)
+		{
+			PlaySoundWithFunctionB4(SoundRelatedClass, &scrollHandle, SE_SYS_MAP_VIEW_MOVING, 1);
+			sfxIsPlaying = true;
+		}
+	}
+	else
+	{
+		if (sfxIsPlaying)
+		{
+			scrollHandle.Stop(0);
+			sfxIsPlaying = false;
+		}
 	}
 
 }

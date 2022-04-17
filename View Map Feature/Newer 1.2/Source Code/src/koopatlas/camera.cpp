@@ -74,23 +74,43 @@ int dWorldCamera_c::onExecute() {
 		int heldButtons = Remocon_GetButtons(GetActiveRemocon());
 		if (heldButtons & WPAD_LEFT) //left
 		{
-			if (currentX > dScKoopatlas_c::instance->WMBorder.xLeft[dScKoopatlas_c::instance->currentMapID])
-				currentX -= 5.0f;
+			if (currentX > dScKoopatlas_c::instance->WMBorder.xLeft[dScKoopatlas_c::instance->currentMapID]) {	
+				currentX -= 7.0f;
+				dScKoopatlas_c::instance->sfxShouldPlay = true;
+			}
+			else
+				dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
 		else if (heldButtons & WPAD_RIGHT) //right
 		{
-			if (currentX < dScKoopatlas_c::instance->WMBorder.xRight[dScKoopatlas_c::instance->currentMapID])
-				currentX += 5.0f;
+			if (currentX < dScKoopatlas_c::instance->WMBorder.xRight[dScKoopatlas_c::instance->currentMapID]) {
+				currentX += 7.0f;
+				dScKoopatlas_c::instance->sfxShouldPlay = true;
+			}
+			else
+				dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
 		else if (heldButtons & WPAD_DOWN) //down
 		{
-			if (currentY > dScKoopatlas_c::instance->WMBorder.yBottom[dScKoopatlas_c::instance->currentMapID])
-				currentY -= 5.0f;
+			if (currentY > dScKoopatlas_c::instance->WMBorder.yBottom[dScKoopatlas_c::instance->currentMapID]) {
+				currentY -= 7.0f;
+				dScKoopatlas_c::instance->sfxShouldPlay = true;
+			}
+			else
+				dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
 		else if (heldButtons & WPAD_UP) //up
 		{
-			if (currentY < dScKoopatlas_c::instance->WMBorder.yTop[dScKoopatlas_c::instance->currentMapID])
-				currentY += 5.0f;
+			if (currentY < dScKoopatlas_c::instance->WMBorder.yTop[dScKoopatlas_c::instance->currentMapID]) {
+				currentY += 7.0f;
+				dScKoopatlas_c::instance->sfxShouldPlay = true;
+			}
+			else
+				dScKoopatlas_c::instance->sfxShouldPlay = false;
+		}
+		else
+		{
+			dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
 	}
 	else {

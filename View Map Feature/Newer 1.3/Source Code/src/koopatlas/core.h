@@ -140,12 +140,15 @@ class dScKoopatlas_c : public dScene_c {
 
 		bool keepMusicPlaying;
 		
-		bool WMViewerVisible = false;
+		bool WMViewerVisible;
 		struct WMViewerBorder
 		{
 			float xLeft[2], xRight[2], yTop[2], yBottom[2]; //Array -> number of maps
 		};
 		WMViewerBorder WMBorder;
+		bool sfxShouldPlay;
+		bool sfxIsPlaying;
+		nw4r::snd::SoundHandle scrollHandle;
 };
 
 extern void *_8042A788;
