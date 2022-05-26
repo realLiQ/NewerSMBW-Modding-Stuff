@@ -560,7 +560,12 @@ void dScKoopatlas_c::executeState_Normal() {
 
 	if (pathManager.doingThings())
 		return;
-
+	
+	if (scrollHandle.Exists()) {
+		scrollHandle.Stop(0);
+		sfxIsPlaying = false;
+	}
+	
 	int nowPressed = Remocon_GetPressed(GetActiveRemocon());
 
 	// Nothing related to the menu is going on
