@@ -72,48 +72,55 @@ int dWorldCamera_c::onExecute() {
 	{
 		// 2460.000000, -2376.000000
 		int heldButtons = Remocon_GetButtons(GetActiveRemocon());
+		bool wasSoundPlayed = false;
 		if (heldButtons & WPAD_LEFT) //left
 		{
 			if (currentX > dScKoopatlas_c::instance->WMBorder.xLeft[dScKoopatlas_c::instance->currentMapID]) {	
 				currentX -= 7.0f;
 				dScKoopatlas_c::instance->sfxShouldPlay = true;
+				wasSoundPlayed = true;
 			}
 			else
 				dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
-		else if (heldButtons & WPAD_RIGHT) //right
+		if (heldButtons & WPAD_RIGHT) //right
 		{
 			if (currentX < dScKoopatlas_c::instance->WMBorder.xRight[dScKoopatlas_c::instance->currentMapID]) {
 				currentX += 7.0f;
 				dScKoopatlas_c::instance->sfxShouldPlay = true;
+				wasSoundPlayed = true;
 			}
 			else
 				dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
-		else if (heldButtons & WPAD_DOWN) //down
+		if (heldButtons & WPAD_DOWN) //down
 		{
 			if (currentY > dScKoopatlas_c::instance->WMBorder.yBottom[dScKoopatlas_c::instance->currentMapID]) {
 				currentY -= 7.0f;
 				dScKoopatlas_c::instance->sfxShouldPlay = true;
+				wasSoundPlayed = true;
 			}
 			else
 				dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
-		else if (heldButtons & WPAD_UP) //up
+		if (heldButtons & WPAD_UP) //up
 		{
 			if (currentY < dScKoopatlas_c::instance->WMBorder.yTop[dScKoopatlas_c::instance->currentMapID]) {
 				currentY += 7.0f;
 				dScKoopatlas_c::instance->sfxShouldPlay = true;
+				wasSoundPlayed = true;
 			}
 			else
 				dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
-		else
+		if (!wasSoundPlayed)
 		{
 			dScKoopatlas_c::instance->sfxShouldPlay = false;
 		}
 	}
-	else {
+	else
+	{
+
 		if (dScKoopatlas_c::instance->warpZoneHacks) {
 			currentX = 2040.0f;
 			currentY = -1460.0f;

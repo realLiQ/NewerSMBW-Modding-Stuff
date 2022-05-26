@@ -583,12 +583,9 @@ void dScKoopatlas_c::executeState_Normal() {
 	 			save->SetLevelCondition(w, l, COND_COIN_ALL);
 #endif
 	} else if (nowPressed & WPAD_A) {
-		sfxShouldPlay = false;
-		sfxIsPlaying = false;
 		WMViewerVisible = true;
 		hud->hideAll();
 		MapSoundPlayer(SoundRelatedClass, SE_SYS_MAP_VIEW_MODE, 1);
-		dWorldCamera_c::instance->zoomLevel = 3.0f;
 		state.setState(&StateID_WMViewerWait);
 	}
 	else if (nowPressed & WPAD_B)
@@ -827,7 +824,7 @@ void dScKoopatlas_c::executeState_WMViewerWait() {
 	int nowPressed = Remocon_GetPressed(GetActiveRemocon());
 
 	if (nowPressed & WPAD_A) {
-		if (sfxIsPlaying) {
+		if (sfxIsPlaying || scrollHandle.Exists()) {
 			scrollHandle.Stop(0);
 			sfxIsPlaying = false;
 		}
