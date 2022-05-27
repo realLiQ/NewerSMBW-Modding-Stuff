@@ -833,8 +833,11 @@ void dScKoopatlas_c::executeState_WMViewerWait() {
 			scrollHandle.Stop(0);
 			sfxIsPlaying = false;
 		}
+
+		dWorldCamera_c::instance->panToPosition(player->pos.x, player->pos.y, 2.8f, true);
+
 		WMViewerVisible = false;
-		dWorldCamera_c::instance->zoomLevel = 2.8f;
+
 		MapSoundPlayer(SoundRelatedClass, SE_SYS_MAP_VIEW_QUIT, 1);
 		state.setState(&StateID_Normal);
 		hud->unhideAll();

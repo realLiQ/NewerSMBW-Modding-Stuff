@@ -68,22 +68,8 @@ int dWMHud_c::onCreate() {
 		layout.resetAnim(SHOW_HEADER);
 		layout.resetAnim(HIDE_ALL);
 
-		static const char *tbNames[2] = {"MenuButtonInfo", "ItemsButtonInfo"};
-		layout.setLangStrings(tbNames, (int[2]){12, 15}, 4, 2);
-
-		nw4r::lyt::Picture* Abutton = layout.findPictureByName("Abutton");
-		nw4r::lyt::Picture* Cbutton = layout.findPictureByName("Cbutton");
-		
-		int cntType = RemoconMng->controllers[0]->controllerType;
-
-		if (cntType == 0)
-		{
-			Cbutton->SetVisible(false);
-		}
-		else
-		{
-			Abutton->SetVisible(false);
-		}
+		static const char *tbNames[3] = {"MenuButtonInfo", "ItemsButtonInfo", "MenuButtonInf_00"};
+		layout.setLangStrings(tbNames, (int[3]){12, 15, 10}, 4, 3);
 
 		static const char *paneNames[] = {
 			"N_IconPos1P_00", "N_IconPos2P_00",
@@ -508,23 +494,8 @@ void dWMHud_c::updatePressableButtonThingies() {
 		int beef = (cntType == 0) ? 0 : 1;
 		GameMgrP->currentControllerType = beef;
 
-		WriteBMGToTextBox(
-				layout.findTextBoxByName("ItemsButtonInfo"),
-				GetBMG(), 4, 15, 0);
-
-		nw4r::lyt::Picture* Abutton = layout.findPictureByName("Abutton");
-		nw4r::lyt::Picture* Cbutton = layout.findPictureByName("Cbutton");
-
-		if (cntType == 0)
-		{
-			Cbutton->SetVisible(false);
-			Abutton->SetVisible(true);
-		}
-		else
-		{
-			Abutton->SetVisible(false);
-			Cbutton->SetVisible(true);
-		}
+		static const char *tbNames[3] = {"MenuButtonInfo", "ItemsButtonInfo", "MenuButtonInf_00"};
+		layout.setLangStrings(tbNames, (int[3]){12, 15, 10}, 4, 3);
 	}
 }
 
